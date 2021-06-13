@@ -9,15 +9,20 @@ import fig.RectangleFigure;
 ////////////////////////////////////////////////
 // Model (M)
 public class DrawModel {
+    public static final int COLOR_PALETTE_SIZE=3;
     protected ArrayList<Figure> fig;
     protected Figure drawingFigure;
-    protected Color currentColor;
     protected DrawEventListener listener;
+    protected Color[] palette = new Color[COLOR_PALETTE_SIZE];
+    protected int currentColor;
 
     public DrawModel() {
         fig = new ArrayList<Figure>();
         drawingFigure = null;
-        currentColor = Color.red;
+        palette[0] = Color.RED;
+        palette[1] = Color.GREEN;
+        palette[2] = Color.BLUE;
+        currentColor = 0;
     }
     public ArrayList<Figure> getFigures() {
         return fig;
@@ -26,7 +31,7 @@ public class DrawModel {
         return fig.get(idx);
     }
     public void createFigure(int x, int y) {
-        Figure f = new RectangleFigure(x, y, 0, 0, currentColor);
+        Figure f = new RectangleFigure(x, y, 0, 0, palette[currentColor]);
         fig.add(f);
         drawingFigure = f;
         update();
@@ -37,8 +42,21 @@ public class DrawModel {
             update();
         }
     }
-    public void changeColor(Color c) {
-        currentColor = c;
+
+    public Color[] getPalette() {
+        return palette;
+    }
+    public Color getCurrentColor() {
+        return palette[currentColor];
+    }
+    public void changeCurrentColor(int paletteNum) {
+        if(paletteNum < 0 || paletteNum >= COLOR_PALETTE_SIZE) {
+            throw new Error("Invalid paletteNum");
+        }
+        currentColor = paletteNum;
+    }
+    public void changeCurrentColor(Color c) {
+        palette[currentColor] = c;
     }
 
     public void addListener(DrawEventListener listener) {
