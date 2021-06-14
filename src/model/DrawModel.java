@@ -12,7 +12,7 @@ public class DrawModel {
     public static final int COLOR_PALETTE_SIZE=3;
     protected ArrayList<Figure> fig;
     protected Figure drawingFigure;
-    protected DrawEventListener listener;
+    protected DrawModelListener listener;
     protected Color[] palette = new Color[COLOR_PALETTE_SIZE];
     protected int currentColor;
 
@@ -59,10 +59,10 @@ public class DrawModel {
         palette[currentColor] = c;
     }
 
-    public void addListener(DrawEventListener listener) {
+    public void addListener(DrawModelListener listener) {
         this.listener = listener;
     }
     public void update() {
-        listener.modelUpdated(new DrawEvent(this));
+        listener.modelUpdated(new DrawModelEvent(this));
     }
 }

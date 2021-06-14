@@ -8,10 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-// Viewは，Observerをimplementsする．Modelを監視して，
-// モデルが更新されたupdateする．実際には，Modelから
-// update が呼び出される．
-public class CanvasView extends JPanel implements DrawEventListener {
+public class CanvasView extends JPanel implements DrawModelListener {
     protected DrawModel model;
     public CanvasView(DrawModel m, DrawController dc) {
         this.setBackground(Color.white);
@@ -27,7 +24,7 @@ public class CanvasView extends JPanel implements DrawEventListener {
             f.draw(g);
         }
     }
-    public void modelUpdated(DrawEvent e) {
+    public void modelUpdated(DrawModelEvent e) {
         repaint();
     }
 }
