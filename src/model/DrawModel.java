@@ -60,7 +60,10 @@ public class DrawModel {
     }
 
     public void addListener(DrawModelListener listener) {
-        this.listener = listener;
+        if (listener == null) {
+            return;
+        }
+        this.listener = ModelEventMulticaster.add(this.listener, listener);
     }
     public void update() {
         listener.modelUpdated(new DrawModelEvent(this));
