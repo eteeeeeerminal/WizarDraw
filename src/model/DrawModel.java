@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import fig.Figure;
 import fig.RectangleFigure;
 
-////////////////////////////////////////////////
-// Model (M)
 public class DrawModel {
     public static final int COLOR_PALETTE_SIZE=3;
     protected ArrayList<Figure> fig;
