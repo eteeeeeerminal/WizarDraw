@@ -5,24 +5,21 @@ import model.*;
 import controller.*;
 import view.*;
 
-//////////////////////////////////////////////////
 // Main class
-//   (GUIを組み立てているので，view の一部と考えてもよい)
 class WizarDraw extends JFrame {
-    DrawModel model;
-    CanvasView view;
-    DrawController drawCont;
-    CommandController commandCont;
+    public static final String appName = "WizarDraw";
+
     public WizarDraw() {
-        model = new DrawModel();
-        drawCont = new DrawController(model);
-        commandCont = new CommandController(model);
+        DrawModel model = new DrawModel();
+        DrawController drawCtrl = new DrawController(model);
+        CommandController commandCont = new CommandController(model);
         this.addKeyListener(commandCont);
-        view = new CanvasView(model, drawCont);
+
+        this.add(new CanvasView(model, drawCtrl), BorderLayout.CENTER);
+
         this.setBackground(Color.black);
-        this.setTitle("Draw Editor");
+        this.setTitle(appName);
         this.setSize(500, 500);
-        this.add(view);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
