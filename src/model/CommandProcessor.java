@@ -3,7 +3,6 @@ package model;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.function.IntConsumer;
 
 public class CommandProcessor {
