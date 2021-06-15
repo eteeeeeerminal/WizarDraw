@@ -3,7 +3,7 @@ package fig;
 import java.awt.*;
 
 // 描画する図形を記録するクラスの抽象クラス
-public abstract class Figure {
+public abstract class Figure implements Cloneable {
     protected int x, y, width, height;
     protected Color color;
     public Figure(int x, int y, int w, int h, Color c) {
@@ -17,6 +17,9 @@ public abstract class Figure {
     public void setLocation(int x, int y) {
         this.x = x; this.y = y;
     }
+    public void setColor(Color c) {
+        color = c;
+    }
     public void reshape(int x1, int y1, int x2, int y2) {
         int newx = Math.min(x1, x2);
         int newy = Math.min(y1, y2);
@@ -26,4 +29,5 @@ public abstract class Figure {
         setSize(neww, newh);
     }
     public abstract void draw(Graphics g);
+    public abstract Figure clone();
 }

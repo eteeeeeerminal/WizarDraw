@@ -17,4 +17,7 @@ public class RectangleFigure extends FillableFigure {
             g.drawRect(x, y, width, height);
         }
     }
+    public RectangleFigure clone() {
+        return new RectangleFigure(x, y, width, height, color, isFilled);
+    }
 }
