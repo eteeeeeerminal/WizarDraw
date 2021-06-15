@@ -9,6 +9,7 @@ import fig.RectangleFigure;
 public class DrawModel {
     public static final int COLOR_PALETTE_SIZE=3;
     protected ArrayList<Figure> fig;
+    protected Figure drawTool;
     protected Figure drawingFigure;
     protected DrawModelListener listener;
     protected Color[] palette = new Color[COLOR_PALETTE_SIZE];
@@ -21,6 +22,7 @@ public class DrawModel {
         palette[1] = Color.GREEN;
         palette[2] = Color.BLUE;
         currentColor = 0;
+        drawTool = new RectangleFigure(0,0,0,0, getCurrentColor());
     }
     public ArrayList<Figure> getFigures() {
         return fig;
@@ -28,8 +30,13 @@ public class DrawModel {
     public Figure getFigure(int idx) {
         return fig.get(idx);
     }
+    public void setRectangle(boolean isFilled) {
+        drawTool = new RectangleFigure(0,0,0,0, getCurrentColor(), isFilled);
+    }
     public void createFigure(int x, int y) {
-        Figure f = new RectangleFigure(x, y, 0, 0, palette[currentColor]);
+        Figure f = drawTool.clone();
+        f.setLocation(x, y);
+        f.setColor(getCurrentColor());
         fig.add(f);
         drawingFigure = f;
         update();
