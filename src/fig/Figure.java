@@ -7,9 +7,9 @@ public abstract class Figure {
     protected int x, y, width, height;
     protected Color color;
     public Figure(int x, int y, int w, int h, Color c) {
-        this.x = x; this.y = y;  // this.x, this.y はインスタンス変数．
-        width = w; height = h;   // ローカル変数で同名の変数がある場合は，this
-        color = c;               // を付けると，インスタンス変数を指す．
+        this.x = x; this.y = y;
+        width = w; height = h;
+        color = c;
     }
     public void setSize(int w, int h) {
         width = w; height = h;
