@@ -12,7 +12,7 @@ public class CommandController implements KeyListener {
     }
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e) {
-        cProcessor.processCommand(e.getKeyCode(), e.getModifiers());
+        cProcessor.processCommand(e.getKeyCode(), e.getModifiersEx());
     }
     public void keyReleased(KeyEvent e) {}
 }

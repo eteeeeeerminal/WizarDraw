@@ -3,6 +3,7 @@ package model;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.function.BiConsumer;
 import java.util.function.IntConsumer;
 
@@ -28,7 +29,7 @@ public class CommandProcessor {
     }
 
     public void processCommand(int keycode, int modifiers) {
-        if ((KeyEvent.SHIFT_DOWN_MASK & keycode) != 0) {
+        if ((KeyEvent.CTRL_DOWN_MASK & modifiers) == KeyEvent.CTRL_DOWN_MASK) {
             // ショートカットを書く
         } else if (KeyEvent.VK_ESCAPE == keycode || KeyEvent.VK_Z == keycode) {
             mode = ModeEnum.NORMAL;
@@ -63,8 +64,8 @@ public class CommandProcessor {
             model.changeCurrentColor(2);
         }
     }
-    protected static void drawToolProcessor(int keycode) {
-        if ((KeyEvent.SHIFT_DOWN_MASK & keycode) != 0) {
+    protected static void drawToolProcessor(int keycode, int modifiers) {
+        if ((KeyEvent.SHIFT_DOWN_MASK & modifiers) == KeyEvent.SHIFT_DOWN_MASK) {
             if (KeyEvent.VK_R == keycode) {
                 model.setRectangle(true);
             }
