@@ -10,7 +10,8 @@ public class CommandProcessor {
     public enum ModeEnum {
         NORMAL(CommandProcessor::normalProcessor),
         FILE(CommandProcessor::fileProcessor),
-        COLOR(CommandProcessor::colorProcessor);
+        COLOR(CommandProcessor::colorProcessor),
+        DRAW_TOOL(CommandProcessor::drawToolProcessor);
 
         private BiConsumer<Integer, Integer> processor;
         private ModeEnum(BiConsumer<Integer, Integer> processor) {
@@ -27,7 +28,7 @@ public class CommandProcessor {
     }
 
     public void processCommand(int keycode, int modifiers) {
-        if (KeyEvent.CTRL_MASK == modifiers) {
+        if ((KeyEvent.SHIFT_DOWN_MASK & keycode) != 0) {
             // ショートカットを書く
         } else if (KeyEvent.VK_ESCAPE == keycode || KeyEvent.VK_Z == keycode) {
             mode = ModeEnum.NORMAL;
@@ -41,6 +42,8 @@ public class CommandProcessor {
             mode = ModeEnum.FILE;
         } else if (KeyEvent.VK_C == keycode) {
             mode = ModeEnum.COLOR;
+        } else if (KeyEvent.VK_S == keycode) {
+            mode = ModeEnum.DRAW_TOOL;
         }
     }
     protected static void fileProcessor(int keyCode, int modifiers) {
@@ -58,6 +61,17 @@ public class CommandProcessor {
             model.changeCurrentColor(1);
         } else if (KeyEvent.VK_3 == keycode) {
             model.changeCurrentColor(2);
+        }
+    }
+    protected static void drawToolProcessor(int keycode) {
+        if ((KeyEvent.SHIFT_DOWN_MASK & keycode) != 0) {
+            if (KeyEvent.VK_R == keycode) {
+                model.setRectangle(true);
+            }
+        } else {
+            if (KeyEvent.VK_R == keycode) {
+                model.setRectangle(false);
+            }
         }
     }
 }
