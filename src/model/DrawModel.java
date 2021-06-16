@@ -3,6 +3,9 @@ package model;
 import java.awt.*;
 import java.util.ArrayList;
 
+import event.DrawModelEvent;
+import event.DrawModelListener;
+import event.ModelEventMulticaster;
 import fig.Figure;
 import fig.RectangleFigure;
 

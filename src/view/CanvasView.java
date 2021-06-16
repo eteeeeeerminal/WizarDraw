@@ -1,5 +1,7 @@
 package view;
 
+import event.DrawModelEvent;
+import event.DrawModelListener;
 import fig.*;
 import model.*;
 import controller.*;

@@ -1,4 +1,6 @@
-package model;
+package event;
+
+import model.DrawModel;
 
 import java.util.EventObject;
 
