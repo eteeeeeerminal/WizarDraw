@@ -12,8 +12,8 @@ class WizarDraw extends JFrame {
     public WizarDraw() {
         DrawModel model = new DrawModel();
         DrawController drawCtrl = new DrawController(model);
-        CommandController commandCont = new CommandController(model);
-        this.addKeyListener(commandCont);
+        CommandController commandCtrl = new CommandController(model);
+        this.addKeyListener(commandCtrl);
 
         this.add(new CanvasView(model, drawCtrl), BorderLayout.CENTER);
 
