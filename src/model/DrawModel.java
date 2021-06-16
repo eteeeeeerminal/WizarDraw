@@ -32,6 +32,7 @@ public class DrawModel {
     }
     public void setRectangle(boolean isFilled) {
         drawTool = new RectangleFigure(0,0,0,0, getCurrentColor(), isFilled);
+        updatePalette();
     }
     public void createFigure(int x, int y) {
         Figure f = drawTool.clone();
@@ -39,12 +40,12 @@ public class DrawModel {
         f.setColor(getCurrentColor());
         fig.add(f);
         drawingFigure = f;
-        update();
+        updateCanvas();
     }
     public void reshapeFigure(int x1, int y1, int x2, int y2) {
         if (drawingFigure != null) {
             drawingFigure.reshape(x1, y1, x2, y2);
-            update();
+            updateCanvas();
         }
     }
 
@@ -59,9 +60,11 @@ public class DrawModel {
             throw new Error("Invalid paletteNum");
         }
         currentColor = paletteNum;
+        updatePalette();
     }
     public void changeCurrentColor(Color c) {
         palette[currentColor] = c;
+        updatePalette();
     }
 
     public void addListener(DrawModelListener listener) {
@@ -70,7 +73,10 @@ public class DrawModel {
         }
         this.listener = ModelEventMulticaster.add(this.listener, listener);
     }
-    public void update() {
-        listener.modelUpdated(new DrawModelEvent(this));
+    public void updateCanvas() {
+        listener.canvasUpdated(new DrawModelEvent(this));
+    }
+    public void updatePalette() {
+        listener.paletteUpdated(new DrawModelEvent(this));
     }
 }

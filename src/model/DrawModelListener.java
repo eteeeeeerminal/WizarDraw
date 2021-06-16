@@ -3,5 +3,6 @@ package model;
 import java.util.EventListener;
 
 public interface DrawModelListener extends EventListener {
-    void modelUpdated(DrawModelEvent e);
+    void canvasUpdated(DrawModelEvent e);
+    void paletteUpdated(DrawModelEvent e);
 }

@@ -9,9 +9,13 @@ public class ModelEventMulticaster implements DrawModelListener {
         this.a = a; this.b = b;
     }
 
-    public void modelUpdated(DrawModelEvent e) {
-        ((DrawModelListener)a).modelUpdated(e);
-        ((DrawModelListener)b).modelUpdated(e);
+    public void canvasUpdated(DrawModelEvent e) {
+        ((DrawModelListener)a).canvasUpdated(e);
+        ((DrawModelListener)b).canvasUpdated(e);
+    }
+    public void paletteUpdated(DrawModelEvent e) {
+        ((DrawModelListener)a).paletteUpdated(e);
+        ((DrawModelListener)b).paletteUpdated(e);
     }
 
     public static DrawModelListener add(DrawModelListener a, DrawModelListener b) {

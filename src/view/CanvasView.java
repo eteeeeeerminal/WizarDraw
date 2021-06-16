@@ -24,7 +24,8 @@ public class CanvasView extends JPanel implements DrawModelListener {
             f.draw(g);
         }
     }
-    public void modelUpdated(DrawModelEvent e) {
+    public void canvasUpdated(DrawModelEvent e) {
         repaint();
     }
+    public void paletteUpdated(DrawModelEvent e) {}
 }
