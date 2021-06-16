@@ -7,25 +7,17 @@ import event.DrawModelEvent;
 import event.DrawModelListener;
 import event.ModelEventMulticaster;
 import fig.Figure;
-import fig.RectangleFigure;
 
 public class DrawModel {
-    public static final int COLOR_PALETTE_SIZE=3;
     protected ArrayList<Figure> fig;
-    protected Figure drawTool;
     protected Figure drawingFigure;
     protected DrawModelListener listener;
-    protected Color[] palette = new Color[COLOR_PALETTE_SIZE];
-    protected int currentColor;
+    protected final PaletteAndBrush paletteBrush;
 
-    public DrawModel() {
-        fig = new ArrayList<Figure>();
+    public DrawModel(PaletteAndBrush p) {
+        fig = new ArrayList<>();
         drawingFigure = null;
-        palette[0] = Color.RED;
-        palette[1] = Color.GREEN;
-        palette[2] = Color.BLUE;
-        currentColor = 0;
-        drawTool = new RectangleFigure(0,0,0,0, getCurrentColor());
+        paletteBrush = p;
     }
     public ArrayList<Figure> getFigures() {
         return fig;
@@ -34,13 +26,10 @@ public class DrawModel {
         return fig.get(idx);
     }
     public void setRectangle(boolean isFilled) {
-        drawTool = new RectangleFigure(0,0,0,0, getCurrentColor(), isFilled);
-        updatePalette();
+        paletteBrush.setRectangle(isFilled);
     }
     public void createFigure(int x, int y) {
-        Figure f = drawTool.clone();
-        f.setLocation(x, y);
-        f.setColor(getCurrentColor());
+        Figure f = paletteBrush.createFigure(x, y);
         fig.add(f);
         drawingFigure = f;
         updateCanvas();
@@ -52,22 +41,14 @@ public class DrawModel {
         }
     }
 
-    public Color[] getPalette() {
-        return palette;
-    }
     public Color getCurrentColor() {
-        return palette[currentColor];
+        return paletteBrush.getBrushColor();
     }
     public void changeCurrentColor(int paletteNum) {
-        if(paletteNum < 0 || paletteNum >= COLOR_PALETTE_SIZE) {
-            throw new Error("Invalid paletteNum");
-        }
-        currentColor = paletteNum;
-        updatePalette();
+        paletteBrush.changeBrushColor(paletteNum);
     }
     public void changeCurrentColor(Color c) {
-        palette[currentColor] = c;
-        updatePalette();
+        paletteBrush.changeBrushColor(c);
     }
 
     public void addListener(DrawModelListener listener) {
@@ -78,8 +59,5 @@ public class DrawModel {
     }
     public void updateCanvas() {
         listener.canvasUpdated(new DrawModelEvent(this));
-    }
-    public void updatePalette() {
-        listener.paletteUpdated(new DrawModelEvent(this));
     }
 }

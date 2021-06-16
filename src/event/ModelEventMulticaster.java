@@ -2,7 +2,8 @@ package event;
 
 import java.util.EventListener;
 
-public class ModelEventMulticaster implements DrawModelListener {
+public class ModelEventMulticaster
+        implements DrawModelListener, PaletteListener {
     protected final EventListener a,b;
 
     protected ModelEventMulticaster(EventListener a, EventListener b) {
@@ -13,13 +14,16 @@ public class ModelEventMulticaster implements DrawModelListener {
         ((DrawModelListener)a).canvasUpdated(e);
         ((DrawModelListener)b).canvasUpdated(e);
     }
-    public void paletteUpdated(DrawModelEvent e) {
-        ((DrawModelListener)a).paletteUpdated(e);
-        ((DrawModelListener)b).paletteUpdated(e);
+    public void paletteUpdated(PaletteEvent e) {
+        ((PaletteListener)a).paletteUpdated(e);
+        ((PaletteListener)b).paletteUpdated(e);
     }
 
     public static DrawModelListener add(DrawModelListener a, DrawModelListener b) {
         return (DrawModelListener)addInternal(a, b);
+    }
+    public static PaletteListener add(PaletteListener a, PaletteListener b) {
+        return (PaletteListener)addInternal(a, b);
     }
 
     protected static EventListener addInternal(EventListener a, EventListener b) {
