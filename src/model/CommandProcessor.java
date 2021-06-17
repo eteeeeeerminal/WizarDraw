@@ -3,9 +3,7 @@ package model;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.function.BiConsumer;
-import java.util.function.IntConsumer;
 
 public class CommandProcessor {
     public enum ModeEnum {
@@ -55,7 +53,9 @@ public class CommandProcessor {
     protected static void colorProcessor(int keycode, int modifiers) {
         if (KeyEvent.VK_C == keycode) {
             Color color = JColorChooser.showDialog(null, "色を選択", model.getCurrentColor());
-            model.changeCurrentColor(color);
+            if (color != null){
+                model.changeCurrentColor(color);
+            }
         } else if (KeyEvent.VK_1 == keycode) {
             model.changeCurrentColor(0);
         } else if (KeyEvent.VK_2 == keycode) {
