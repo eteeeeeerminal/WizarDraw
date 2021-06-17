@@ -3,6 +3,7 @@ import java.awt.*;
 
 import model.*;
 import controller.*;
+import model.Canvas;
 import view.*;
 
 // Main class
@@ -10,12 +11,14 @@ class WizarDraw extends JFrame {
     public static final String appName = "WizarDraw";
 
     public WizarDraw() {
-        DrawModel model = new DrawModel();
+        PaletteAndBrush palette = new PaletteAndBrush();
+        Canvas canvas = new Canvas();
+        DrawModel model = new DrawModel(palette, canvas);
         DrawController drawCtrl = new DrawController(model);
         CommandController commandCtrl = new CommandController(model);
         this.addKeyListener(commandCtrl);
 
-        this.add(new CanvasView(model, drawCtrl), BorderLayout.CENTER);
+        this.add(new CanvasView(canvas, drawCtrl), BorderLayout.CENTER);
 
         this.setBackground(Color.black);
         this.setTitle(appName);
