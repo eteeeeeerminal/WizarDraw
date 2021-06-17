@@ -1,56 +1,69 @@
 package model;
 
+import event.CommandEvent;
+import event.CommandListener;
+import event.ModelEventMulticaster;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.function.BiConsumer;
 
 public class CommandProcessor {
     public enum ModeEnum {
-        NORMAL(CommandProcessor::normalProcessor),
-        FILE(CommandProcessor::fileProcessor),
-        COLOR(CommandProcessor::colorProcessor),
-        DRAW_TOOL(CommandProcessor::drawToolProcessor);
-
-        private BiConsumer<Integer, Integer> processor;
-        private ModeEnum(BiConsumer<Integer, Integer> processor) {
-            this.processor = processor;
-        }
-        public void processCommand(int keycode, int modifiers) {
-            this.processor.accept(keycode, modifiers);
-        }
+        NORMAL,
+        FILE,
+        COLOR,
+        DRAW_TOOL,
     }
-    protected static ModeEnum mode = ModeEnum.NORMAL;
-    protected static DrawModel model;
+    protected ModeEnum mode = ModeEnum.NORMAL;
+    protected final DrawModel model;
+    protected CommandListener listener;
+
     public CommandProcessor(DrawModel m) {
         model = m;
+    }
+    public ModeEnum getMode() {
+        return mode;
     }
 
     public void processCommand(int keycode, int modifiers) {
         if ((KeyEvent.CTRL_DOWN_MASK & modifiers) == KeyEvent.CTRL_DOWN_MASK) {
             // ショートカットを書く
         } else if (KeyEvent.VK_ESCAPE == keycode || KeyEvent.VK_Z == keycode) {
-            mode = ModeEnum.NORMAL;
+            modeChange(ModeEnum.NORMAL);
         } else {
-            mode.processCommand(keycode, modifiers);
+            switch (mode) {
+                case NORMAL:
+                    normalProcessor(keycode, modifiers);
+                    break;
+                case COLOR:
+                    colorProcessor(keycode, modifiers);
+                    break;
+                case DRAW_TOOL:
+                    drawToolProcessor(keycode, modifiers);
+                    break;
+                case FILE:
+                    fileProcessor(keycode, modifiers);
+                    break;
+            }
         }
     }
 
-    protected static void normalProcessor(int keycode, int modifiers) {
+    protected void normalProcessor(int keycode, int modifiers) {
         if (KeyEvent.VK_F == keycode) {
-            mode = ModeEnum.FILE;
+            modeChange(ModeEnum.FILE);
         } else if (KeyEvent.VK_C == keycode) {
-            mode = ModeEnum.COLOR;
+            modeChange(ModeEnum.COLOR);
         } else if (KeyEvent.VK_S == keycode) {
-            mode = ModeEnum.DRAW_TOOL;
+            modeChange(ModeEnum.DRAW_TOOL);
         }
     }
-    protected static void fileProcessor(int keyCode, int modifiers) {
+    protected void fileProcessor(int keyCode, int modifiers) {
         if (KeyEvent.VK_Q == keyCode) {
             System.exit(0);
         }
     }
-    protected static void colorProcessor(int keycode, int modifiers) {
+    protected void colorProcessor(int keycode, int modifiers) {
         if (KeyEvent.VK_C == keycode) {
             Color color = JColorChooser.showDialog(null, "色を選択", model.getCurrentColor());
             if (color != null){
@@ -64,7 +77,7 @@ public class CommandProcessor {
             model.changeCurrentColor(2);
         }
     }
-    protected static void drawToolProcessor(int keycode, int modifiers) {
+    protected void drawToolProcessor(int keycode, int modifiers) {
         if ((KeyEvent.SHIFT_DOWN_MASK & modifiers) == KeyEvent.SHIFT_DOWN_MASK) {
             if (KeyEvent.VK_R == keycode) {
                 model.setRectangle(true);
@@ -73,6 +86,18 @@ public class CommandProcessor {
             if (KeyEvent.VK_R == keycode) {
                 model.setRectangle(false);
             }
+        }
+    }
+    public void addListener(CommandListener l) {
+        if (l == null) {
+            return;
+        }
+        listener = ModelEventMulticaster.add(listener, l);
+    }
+    public void modeChange(ModeEnum m) {
+        mode = m;
+        if (listener != null) {
+            listener.modeChanged(new CommandEvent(this));
         }
     }
 }
