@@ -19,8 +19,8 @@ class WizarDraw extends JFrame {
         this.addKeyListener(commandCtrl);
 
         this.add(new CanvasView(canvas, drawCtrl), BorderLayout.CENTER);
+        this.add(new PaletteView(palette), BorderLayout.NORTH);
 
-        this.setBackground(Color.black);
         this.setTitle(appName);
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
