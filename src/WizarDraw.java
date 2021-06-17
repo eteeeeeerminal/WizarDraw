@@ -1,9 +1,8 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
 
 import model.*;
 import controller.*;
-import model.Canvas;
 import view.*;
 
 // Main class
@@ -14,8 +13,9 @@ class WizarDraw extends JFrame {
         PaletteAndBrush palette = new PaletteAndBrush();
         Canvas canvas = new Canvas();
         DrawModel model = new DrawModel(palette, canvas);
+        CommandProcessor cp = new CommandProcessor(model);
         DrawController drawCtrl = new DrawController(model);
-        CommandController commandCtrl = new CommandController(model);
+        CommandController commandCtrl = new CommandController(cp);
         this.addKeyListener(commandCtrl);
 
         this.add(new CanvasView(canvas, drawCtrl), BorderLayout.CENTER);
