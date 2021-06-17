@@ -18,7 +18,9 @@ public class PaletteView extends JPanel implements PaletteListener {
 
         size = 30; margin = 5;
         int outerSize = size+2*margin;
-        this.setPreferredSize(new Dimension(outerSize*4, outerSize));
+        setPreferredSize(new Dimension(outerSize*4, outerSize));
+        setMinimumSize(new Dimension(outerSize*3, outerSize));
+        setMaximumSize(new Dimension(outerSize*5, outerSize));
 
         Color[] paletteColors = palette.getPalette();
         paletteFig = new Figure[3];
