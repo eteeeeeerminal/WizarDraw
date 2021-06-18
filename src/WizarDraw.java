@@ -1,4 +1,4 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.BorderLayout;
 
 import model.*;
@@ -19,7 +19,12 @@ class WizarDraw extends JFrame {
         this.addKeyListener(commandCtrl);
 
         this.add(new CanvasView(canvas, drawCtrl), BorderLayout.CENTER);
-        this.add(new PaletteView(palette), BorderLayout.NORTH);
+
+        JPanel toolBar = new JPanel();
+        toolBar.setLayout(new BoxLayout(toolBar, BoxLayout.X_AXIS));
+        toolBar.add(new PaletteView(palette));
+        toolBar.add(new StatusView(cp));
+        this.add(toolBar, BorderLayout.NORTH);
 
         this.setTitle(appName);
         this.setSize(500, 500);
