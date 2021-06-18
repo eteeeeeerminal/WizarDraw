@@ -13,7 +13,7 @@ public class CommandProcessor {
         NORMAL,
         FILE,
         COLOR,
-        DRAW_TOOL,
+        BRUSH,
     }
     protected ModeEnum mode = ModeEnum.NORMAL;
     protected final DrawModel model;
@@ -39,8 +39,8 @@ public class CommandProcessor {
                 case COLOR:
                     colorProcessor(keycode, modifiers);
                     break;
-                case DRAW_TOOL:
-                    drawToolProcessor(keycode, modifiers);
+                case BRUSH:
+                    brushProcessor(keycode, modifiers);
                     break;
                 case FILE:
                     fileProcessor(keycode, modifiers);
@@ -55,7 +55,7 @@ public class CommandProcessor {
         } else if (KeyEvent.VK_C == keycode) {
             modeChange(ModeEnum.COLOR);
         } else if (KeyEvent.VK_S == keycode) {
-            modeChange(ModeEnum.DRAW_TOOL);
+            modeChange(ModeEnum.BRUSH);
         }
     }
     protected void fileProcessor(int keyCode, int modifiers) {
@@ -77,7 +77,7 @@ public class CommandProcessor {
             model.changeCurrentColor(2);
         }
     }
-    protected void drawToolProcessor(int keycode, int modifiers) {
+    protected void brushProcessor(int keycode, int modifiers) {
         if ((KeyEvent.SHIFT_DOWN_MASK & modifiers) == KeyEvent.SHIFT_DOWN_MASK) {
             if (KeyEvent.VK_R == keycode) {
                 model.setRectangle(true);
