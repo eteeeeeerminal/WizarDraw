@@ -9,12 +9,8 @@ import javax.swing.*;
 
 public class StatusView extends JPanel implements ModeListener {
     protected final JLabel modeLabel;
-    protected final CommandController cmdProcessor;
 
-    public StatusView(CommandController cp) {
-        cmdProcessor = cp;
-        cmdProcessor.addModeListener(this);
-
+    public StatusView() {
         modeLabel = new JLabel(ModeEnum.NORMAL.name);
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         add(new JLabel("mode: "));
@@ -22,6 +18,6 @@ public class StatusView extends JPanel implements ModeListener {
     }
 
     public void modeChanged(ModeEvent e) {
-        modeLabel.setText(cmdProcessor.getMode().name);
+        modeLabel.setText(e.getLatestMode().name);
     }
 }

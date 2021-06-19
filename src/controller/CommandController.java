@@ -110,9 +110,10 @@ public class CommandController implements KeyListener {
         modeListener = WizarDrawEventMulticaster.add(modeListener, l);
     }
     public void modeChange(ModeEnum m) {
+        ModeEnum previous = mode;
         mode = m;
         if (modeListener != null) {
-            modeListener.modeChanged(new ModeEvent(this));
+            modeListener.modeChanged(new ModeEvent(this, mode, previous));
         }
     }
 }

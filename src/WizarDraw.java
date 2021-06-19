@@ -23,11 +23,12 @@ class WizarDraw extends JFrame {
         JPanel toolBar = new JPanel();
         toolBar.setLayout(new BoxLayout(toolBar, BoxLayout.X_AXIS));
         toolBar.add(new PaletteView(palette));
-        toolBar.add(new StatusView(commandCtrl));
+        StatusView status = new StatusView();
+        commandCtrl.addModeListener(status);
+        toolBar.add(status);
         this.add(toolBar, BorderLayout.NORTH);
 
         this.setTitle(appName);
-        this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
