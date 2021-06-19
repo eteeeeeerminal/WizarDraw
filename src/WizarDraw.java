@@ -8,6 +8,8 @@ import view.*;
 // Main class
 class WizarDraw extends JFrame {
     public static final String appName = "WizarDraw";
+    public static final int initialWidth = 1280;
+    public static final int initialHeight = 720;
 
     public WizarDraw() {
         PaletteAndBrush palette = new PaletteAndBrush();
@@ -29,6 +31,7 @@ class WizarDraw extends JFrame {
         this.add(toolBar, BorderLayout.NORTH);
 
         this.setTitle(appName);
+        this.setSize(initialWidth, initialHeight);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
