@@ -8,14 +8,16 @@ import view.*;
 // Main class
 class WizarDraw extends JFrame {
     public static final String appName = "WizarDraw";
+    public static final int initialWidth = 1280;
+    public static final int initialHeight = 720;
 
     public WizarDraw() {
         PaletteAndBrush palette = new PaletteAndBrush();
         Canvas canvas = new Canvas();
         DrawModel model = new DrawModel(palette, canvas);
-        CommandProcessor cp = new CommandProcessor(model);
         DrawController drawCtrl = new DrawController(model);
-        CommandController commandCtrl = new CommandController(cp);
+        CommandController commandCtrl = new CommandController();
+        commandCtrl.addCommandListener(model);
         this.addKeyListener(commandCtrl);
 
         this.add(new CanvasView(canvas, drawCtrl), BorderLayout.CENTER);
@@ -23,11 +25,17 @@ class WizarDraw extends JFrame {
         JPanel toolBar = new JPanel();
         toolBar.setLayout(new BoxLayout(toolBar, BoxLayout.X_AXIS));
         toolBar.add(new PaletteView(palette));
-        toolBar.add(new StatusView(cp));
+        StatusView status = new StatusView();
+        commandCtrl.addModeListener(status);
+        toolBar.add(status);
         this.add(toolBar, BorderLayout.NORTH);
 
+        CommandNavigator navi = new CommandNavigator();
+        commandCtrl.addModeListener(navi);
+        this.add(navi, BorderLayout.WEST);
+
         this.setTitle(appName);
-        this.setSize(500, 500);
+        this.setSize(initialWidth, initialHeight);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
