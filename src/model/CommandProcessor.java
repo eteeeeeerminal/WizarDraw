@@ -66,9 +66,7 @@ public class CommandProcessor {
     protected void colorProcessor(int keycode, int modifiers) {
         if (KeyEvent.VK_C == keycode) {
             Color color = JColorChooser.showDialog(null, "色を選択", model.getCurrentColor());
-            if (color != null){
-                model.changeCurrentColor(color);
-            }
+            model.changeCurrentColor(color);
         } else if (KeyEvent.VK_1 == keycode) {
             model.changeCurrentColor(0);
         } else if (KeyEvent.VK_2 == keycode) {

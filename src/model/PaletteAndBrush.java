@@ -46,6 +46,9 @@ public class PaletteAndBrush {
         update();
     }
     public void changeBrushColor(Color c) {
+        if (c == null) {
+            return;
+        }
         palette[currentColor] = c;
         update();
     }
