@@ -3,7 +3,8 @@ package event;
 import java.util.EventListener;
 
 public class WizarDrawEventMulticaster
-        implements PaletteListener, CanvasListener, CommandListener {
+        implements PaletteListener, CanvasListener,
+            CommandListener, ModeListener {
     protected final EventListener a,b;
 
     protected WizarDrawEventMulticaster(EventListener a, EventListener b) {
@@ -18,9 +19,13 @@ public class WizarDrawEventMulticaster
         ((PaletteListener)a).paletteUpdated(e);
         ((PaletteListener)b).paletteUpdated(e);
     }
-    public void modeChanged(CommandEvent e) {
-        ((CommandListener)a).modeChanged(e);
-        ((CommandListener)b).modeChanged(e);
+    public void commandPerformed(CommandEvent e) {
+        ((CommandListener)a).commandPerformed(e);
+        ((CommandListener)b).commandPerformed(e);
+    }
+    public void modeChanged(ModeEvent e) {
+        ((ModeListener)a).modeChanged(e);
+        ((ModeListener)b).modeChanged(e);
     }
 
     public static PaletteListener add(PaletteListener a, PaletteListener b) {
@@ -28,6 +33,9 @@ public class WizarDrawEventMulticaster
     }
     public static CanvasListener add(CanvasListener a, CanvasListener b) {
         return (CanvasListener)addInternal(a, b);
+    }
+    public static ModeListener add(ModeListener a, ModeListener b) {
+        return (ModeListener)addInternal(a, b);
     }
     public static CommandListener add(CommandListener a, CommandListener b) {
         return (CommandListener)addInternal(a, b);

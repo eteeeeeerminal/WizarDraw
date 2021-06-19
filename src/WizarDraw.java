@@ -13,9 +13,9 @@ class WizarDraw extends JFrame {
         PaletteAndBrush palette = new PaletteAndBrush();
         Canvas canvas = new Canvas();
         DrawModel model = new DrawModel(palette, canvas);
-        CommandProcessor cp = new CommandProcessor(model);
         DrawController drawCtrl = new DrawController(model);
-        CommandController commandCtrl = new CommandController(cp);
+        CommandController commandCtrl = new CommandController();
+        commandCtrl.addCommandListener(model);
         this.addKeyListener(commandCtrl);
 
         this.add(new CanvasView(canvas, drawCtrl), BorderLayout.CENTER);
@@ -23,7 +23,7 @@ class WizarDraw extends JFrame {
         JPanel toolBar = new JPanel();
         toolBar.setLayout(new BoxLayout(toolBar, BoxLayout.X_AXIS));
         toolBar.add(new PaletteView(palette));
-        toolBar.add(new StatusView(cp));
+        toolBar.add(new StatusView(commandCtrl));
         this.add(toolBar, BorderLayout.NORTH);
 
         this.setTitle(appName);
