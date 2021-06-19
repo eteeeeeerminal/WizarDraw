@@ -1,50 +1,32 @@
 package model;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-import fig.Figure;
-import fig.RectangleFigure;
-
-////////////////////////////////////////////////
-// Model (M)
 public class DrawModel {
-    protected ArrayList<Figure> fig;
-    protected Figure drawingFigure;
-    protected Color currentColor;
-    protected DrawEventListener listener;
+    protected final PaletteAndBrush paletteBrush;
+    protected final Canvas canvas;
 
-    public DrawModel() {
-        fig = new ArrayList<Figure>();
-        drawingFigure = null;
-        currentColor = Color.red;
+    public DrawModel(PaletteAndBrush p, Canvas c) {
+        paletteBrush = p;
+        canvas = c;
     }
-    public ArrayList<Figure> getFigures() {
-        return fig;
-    }
-    public Figure getFigure(int idx) {
-        return fig.get(idx);
+    public void setRectangle(boolean isFilled) {
+        paletteBrush.setRectangle(isFilled);
     }
     public void createFigure(int x, int y) {
-        Figure f = new RectangleFigure(x, y, 0, 0, currentColor);
-        fig.add(f);
-        drawingFigure = f;
-        update();
+        canvas.createFigure(paletteBrush.createFigure(x, y));
     }
     public void reshapeFigure(int x1, int y1, int x2, int y2) {
-        if (drawingFigure != null) {
-            drawingFigure.reshape(x1, y1, x2, y2);
-            update();
-        }
-    }
-    public void changeColor(Color c) {
-        currentColor = c;
+        canvas.reshapeFigure(x1, y1, x2, y2);
     }
 
-    public void addListener(DrawEventListener listener) {
-        this.listener = listener;
+    public Color getCurrentColor() {
+        return paletteBrush.getBrushColor();
     }
-    public void update() {
-        listener.modelUpdated(new DrawEvent(this));
+    public void changeCurrentColor(int paletteNum) {
+        paletteBrush.changeBrushColor(paletteNum);
+    }
+    public void changeCurrentColor(Color c) {
+        paletteBrush.changeBrushColor(c);
     }
 }

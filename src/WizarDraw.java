@@ -1,28 +1,33 @@
 import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 
 import model.*;
 import controller.*;
 import view.*;
 
-//////////////////////////////////////////////////
 // Main class
-//   (GUIを組み立てているので，view の一部と考えてもよい)
 class WizarDraw extends JFrame {
-    DrawModel model;
-    CanvasView view;
-    DrawController drawCont;
-    CommandController commandCont;
+    public static final String appName = "WizarDraw";
+
     public WizarDraw() {
-        model = new DrawModel();
-        drawCont = new DrawController(model);
-        commandCont = new CommandController(model);
-        this.addKeyListener(commandCont);
-        view = new CanvasView(model, drawCont);
-        this.setBackground(Color.black);
-        this.setTitle("Draw Editor");
+        PaletteAndBrush palette = new PaletteAndBrush();
+        Canvas canvas = new Canvas();
+        DrawModel model = new DrawModel(palette, canvas);
+        CommandProcessor cp = new CommandProcessor(model);
+        DrawController drawCtrl = new DrawController(model);
+        CommandController commandCtrl = new CommandController(cp);
+        this.addKeyListener(commandCtrl);
+
+        this.add(new CanvasView(canvas, drawCtrl), BorderLayout.CENTER);
+
+        JPanel toolBar = new JPanel();
+        toolBar.setLayout(new BoxLayout(toolBar, BoxLayout.X_AXIS));
+        toolBar.add(new PaletteView(palette));
+        toolBar.add(new StatusView(cp));
+        this.add(toolBar, BorderLayout.NORTH);
+
+        this.setTitle(appName);
         this.setSize(500, 500);
-        this.add(view);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
