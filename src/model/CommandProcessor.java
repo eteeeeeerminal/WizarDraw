@@ -2,7 +2,7 @@ package model;
 
 import event.CommandEvent;
 import event.CommandListener;
-import event.ModelEventMulticaster;
+import event.WizarDrawEventMulticaster;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,7 +92,7 @@ public class CommandProcessor {
         if (l == null) {
             return;
         }
-        listener = ModelEventMulticaster.add(listener, l);
+        listener = WizarDrawEventMulticaster.add(listener, l);
     }
     public void modeChange(ModeEnum m) {
         mode = m;

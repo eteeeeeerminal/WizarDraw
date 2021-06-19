@@ -2,7 +2,7 @@ package model;
 
 import event.CanvasEvent;
 import event.CanvasListener;
-import event.ModelEventMulticaster;
+import event.WizarDrawEventMulticaster;
 import fig.Figure;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class Canvas {
         if (l == null) {
             return;
         }
-        listener = ModelEventMulticaster.add(listener, l);
+        listener = WizarDrawEventMulticaster.add(listener, l);
     }
     protected void update() {
         if (listener != null) {

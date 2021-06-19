@@ -1,6 +1,6 @@
 package model;
 
-import event.ModelEventMulticaster;
+import event.WizarDrawEventMulticaster;
 import event.PaletteEvent;
 import event.PaletteListener;
 import fig.Figure;
@@ -53,7 +53,7 @@ public class PaletteAndBrush {
         if (l == null) {
             return;
         }
-        listener = ModelEventMulticaster.add(listener, l);
+        listener = WizarDrawEventMulticaster.add(listener, l);
     }
     protected void update() {
         if (listener != null) {

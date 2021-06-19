@@ -2,11 +2,11 @@ package event;
 
 import java.util.EventListener;
 
-public class ModelEventMulticaster
+public class WizarDrawEventMulticaster
         implements PaletteListener, CanvasListener, CommandListener {
     protected final EventListener a,b;
 
-    protected ModelEventMulticaster(EventListener a, EventListener b) {
+    protected WizarDrawEventMulticaster(EventListener a, EventListener b) {
         this.a = a; this.b = b;
     }
 
@@ -36,6 +36,6 @@ public class ModelEventMulticaster
     protected static EventListener addInternal(EventListener a, EventListener b) {
         if(a == null) return b;
         if(b == null) return a;
-        return new ModelEventMulticaster(a, b);
+        return new WizarDrawEventMulticaster(a, b);
     }
 }
