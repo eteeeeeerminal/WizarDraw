@@ -30,6 +30,10 @@ class WizarDraw extends JFrame {
         toolBar.add(status);
         this.add(toolBar, BorderLayout.NORTH);
 
+        CommandNavigator navi = new CommandNavigator();
+        commandCtrl.addModeListener(navi);
+        this.add(navi, BorderLayout.WEST);
+
         this.setTitle(appName);
         this.setSize(initialWidth, initialHeight);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
