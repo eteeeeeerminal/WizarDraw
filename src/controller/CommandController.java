@@ -20,9 +20,6 @@ public class CommandController implements KeyListener {
     }
     public void keyReleased(KeyEvent e) {}
 
-    public ModeEnum getMode() {
-        return mode;
-    }
     public void processCommand(int keycode, int modifiers) {
         if ((KeyEvent.CTRL_DOWN_MASK & modifiers) == KeyEvent.CTRL_DOWN_MASK) {
             // ショートカットを書く
