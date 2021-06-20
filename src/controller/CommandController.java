@@ -39,7 +39,11 @@ public class CommandController
 
     public void processCommand(int keycode, int modifiers) {
         if ((KeyEvent.CTRL_DOWN_MASK & modifiers) == KeyEvent.CTRL_DOWN_MASK) {
-            // ショートカットを書く
+            if (KeyEvent.VK_Z == keycode) {
+                simpleCommandPerform(CommandEnum.UNDO);
+            } else if (KeyEvent.VK_Y == keycode) {
+                simpleCommandPerform(CommandEnum.REDO);
+            }
         } else if (KeyEvent.VK_ESCAPE == keycode || KeyEvent.VK_Z == keycode) {
             modeChange(ModeEnum.NORMAL);
         } else {

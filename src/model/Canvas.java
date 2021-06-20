@@ -5,23 +5,19 @@ import event.CanvasListener;
 import event.WizarDrawEventMulticaster;
 import fig.Figure;
 
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 
 public class Canvas {
-    protected ArrayList<Figure> fig;
-    protected Figure selectedFigure;
-    protected CanvasListener listener;
+    protected ArrayDeque<Figure> canvasFigs = new ArrayDeque<>();
+    protected ArrayDeque<Figure> deletedFigs = new ArrayDeque<>();
+    protected Figure selectedFigure = null;
+    protected CanvasListener listener = null;
 
-    public Canvas() {
-        fig = new ArrayList<>();
-        selectedFigure = null;
-        listener = null;
-    }
-    public ArrayList<Figure> getFigures() {
-        return fig;
+    public ArrayDeque<Figure> getFigures() {
+        return canvasFigs;
     }
     public void createFigure(Figure f) {
-        fig.add(f);
+        canvasFigs.addFirst(f);
         selectedFigure = f;
         update();
     }
@@ -29,6 +25,20 @@ public class Canvas {
         if (selectedFigure != null) {
             selectedFigure.reshape(x1, y1, x2, y2);
         }
+        update();
+    }
+    public void undo() {
+        if (canvasFigs.size() < 1) {
+            return;
+        }
+        deletedFigs.addFirst(canvasFigs.removeFirst());
+        update();
+    }
+    public void redo() {
+        if (deletedFigs.size() < 1) {
+            return;
+        }
+        canvasFigs.addFirst(deletedFigs.removeFirst());
         update();
     }
     public void addListener(CanvasListener l) {

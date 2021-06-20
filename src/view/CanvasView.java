@@ -7,7 +7,7 @@ import model.Canvas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 
 public class CanvasView extends JPanel implements CanvasListener {
     protected final Canvas canvas;
@@ -18,7 +18,7 @@ public class CanvasView extends JPanel implements CanvasListener {
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ArrayList<Figure> figs = canvas.getFigures();
+        ArrayDeque<Figure> figs = canvas.getFigures();
         for(Figure f: figs) {
             f.draw(g);
         }

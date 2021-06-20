@@ -8,7 +8,6 @@ import event.ModeListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashMap;
 
@@ -57,6 +56,8 @@ class Div extends JPanel {
 public class CommandNavigator extends JPanel implements ModeListener {
     protected HashMap<ModeEnum, Div> modeNavElements = new HashMap<>();
     public CommandNavigator() {
+        setLayout(new BorderLayout());
+
         Div fileMode = new Div(
                 makeLabel(ModeEnum.FILE),
                 new Items(new JComponent[]{
@@ -88,7 +89,17 @@ public class CommandNavigator extends JPanel implements ModeListener {
                 })
         );
         normalMode.activate();
-        add(normalMode);
+        add(new Padding(normalMode, 3), BorderLayout.CENTER);
+
+        Div rootCommands = new Div(
+                new JLabel("Root commands"),
+                new Items(new JComponent[]{
+                        makeLabel(ModeEnum.NORMAL),
+                        makeLabel(CommandEnum.UNDO),
+                        makeLabel(CommandEnum.REDO),
+                })
+        );
+        add(new Padding(rootCommands, 3), BorderLayout.SOUTH);
 
         modeNavElements.put(ModeEnum.NORMAL, normalMode);
         modeNavElements.put(ModeEnum.FILE, fileMode);

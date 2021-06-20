@@ -23,6 +23,12 @@ public class DrawModel implements CommandListener {
             case RESHAPE_FIGURE:
                 canvas.reshapeFigure(e.getPoint1().x, e.getPoint1().y, e.getPoint2().x, e.getPoint2().y);
                 break;
+            case UNDO:
+                canvas.undo();
+                break;
+            case REDO:
+                canvas.redo();
+                break;
             case QUIT:
                 System.exit(0);
                 break;

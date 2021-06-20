@@ -3,6 +3,8 @@ package command;
 public enum CommandEnum {
     CREATE_FIGURE("CreateFigure", "MouseLB"),
     RESHAPE_FIGURE("ReshapeFigure", "MouseLB"),
+    UNDO("Undo", "Ctrl+z"),
+    REDO("Redo", "Ctrl+y"),
     QUIT("Quit", "q"),
     CHANGE_COLOR("ChangeColor", "c"),
     PALETTE1("Palette1", "1"),
