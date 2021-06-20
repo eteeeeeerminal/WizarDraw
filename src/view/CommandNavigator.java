@@ -7,6 +7,7 @@ import event.ModeListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashMap;
@@ -46,10 +47,10 @@ class Div extends JPanel {
         deactivate();
     }
     public void activate() {
-        setBorder(new LineBorder(Color.RED, 3));
+        setBorder(new EtchedBorder(Color.RED, Color.RED));
     }
     public void deactivate() {
-        setBorder(new LineBorder(Color.BLACK, 1));
+        setBorder(new EtchedBorder(new Color(0, 0, 0, 0), Color.BLACK));
     }
 }
 
