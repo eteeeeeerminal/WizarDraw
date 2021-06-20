@@ -12,7 +12,3 @@ public enum ModeEnum {
         this.name = name; this.command = command;
     }
 }
-
-// mode change event
-// command event
-// special command event
