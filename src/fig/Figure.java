@@ -33,8 +33,8 @@ public abstract class Figure implements Cloneable {
         color = c;
     }
     public boolean isInFigBox(int x, int y) {
-        return this.x <= x && this.y <= y
-                && x <= this.x + width && y <= this.y + height;
+        return getX() <= x && getY() <= y
+                && x <= getX() + getWidth() && y <= getY() + getHeight();
     }
     public void reshape(int x1, int y1, int x2, int y2) {
         int newx = Math.min(x1, x2);
