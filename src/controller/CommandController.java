@@ -49,7 +49,7 @@ public class CommandController
         if ((KeyEvent.CTRL_DOWN_MASK & modifiers) == KeyEvent.CTRL_DOWN_MASK) {
             if (KeyEvent.VK_Z == keycode) {
                 simpleCommandPerform(CommandEnum.UNDO);
-            } else if (KeyEvent.VK_Y == keycode) {
+            } else if (KeyEvent.VK_X == keycode) {
                 simpleCommandPerform(CommandEnum.REDO);
             }
         } else if (KeyEvent.VK_ESCAPE == keycode || KeyEvent.VK_Z == keycode) {

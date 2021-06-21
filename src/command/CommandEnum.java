@@ -9,7 +9,7 @@ public enum CommandEnum {
     HIGHLIGHT_OFF("HighlightOFF", "ModeChange"),
     DELETE("Delete", "d"),
     UNDO("Undo", "Ctrl+z"),
-    REDO("Redo", "Ctrl+y"),
+    REDO("Redo", "Ctrl+x"),
     QUIT("Quit", "q"),
     CHANGE_COLOR("ChangeColor", "c"),
     PALETTE1("Palette1", "1"),
