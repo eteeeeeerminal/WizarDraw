@@ -18,7 +18,8 @@ public enum CommandEnum {
     RECT("Rect", "r"),
     FILLED_RECT("FilledRect", "Shift+r"),
     CIRCLE("Circle", "c"),
-    FILLED_CIRCLE("FilledCircle","Shift+c");
+    FILLED_CIRCLE("FilledCircle","Shift+c"),
+    LINE("Line", "s");
 
     public final String name;
     public final String command;

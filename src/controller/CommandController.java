@@ -115,6 +115,8 @@ public class CommandController
                 simpleCommandPerform(CommandEnum.RECT);
             } else if (KeyEvent.VK_C == keycode) {
                 simpleCommandPerform(CommandEnum.CIRCLE);
+            } else if (KeyEvent.VK_S == keycode) {
+                simpleCommandPerform(CommandEnum.LINE);
             }
         }
     }
