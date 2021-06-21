@@ -8,6 +8,7 @@ import model.Canvas;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayDeque;
+import java.util.Iterator;
 
 public class CanvasView extends JPanel implements CanvasListener {
     protected final Canvas canvas;
@@ -19,8 +20,9 @@ public class CanvasView extends JPanel implements CanvasListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         ArrayDeque<Figure> figs = canvas.getFigures();
-        for(Figure f: figs) {
-            f.draw(g);
+        Iterator<Figure> iterator = figs.descendingIterator();
+        while(iterator.hasNext()) {
+            iterator.next().draw(g);
         }
     }
     public void canvasUpdated(CanvasEvent e) {
