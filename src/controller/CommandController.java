@@ -107,10 +107,14 @@ public class CommandController
         if ((KeyEvent.SHIFT_DOWN_MASK & modifiers) == KeyEvent.SHIFT_DOWN_MASK) {
             if (KeyEvent.VK_R == keycode) {
                 simpleCommandPerform(CommandEnum.FILLED_RECT);
+            } else if (KeyEvent.VK_C == keycode) {
+                simpleCommandPerform(CommandEnum.FILLED_CIRCLE);
             }
         } else {
             if (KeyEvent.VK_R == keycode) {
                 simpleCommandPerform(CommandEnum.RECT);
+            } else if (KeyEvent.VK_C == keycode) {
+                simpleCommandPerform(CommandEnum.CIRCLE);
             }
         }
     }

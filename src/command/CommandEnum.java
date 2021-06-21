@@ -16,7 +16,9 @@ public enum CommandEnum {
     PALETTE2("Palette2", "2"),
     PALETTE3("Palette3", "3"),
     RECT("Rect", "r"),
-    FILLED_RECT("FilledRect", "Shift+r");
+    FILLED_RECT("FilledRect", "Shift+r"),
+    CIRCLE("Circle", "c"),
+    FILLED_CIRCLE("FilledCircle","Shift+c");
 
     public final String name;
     public final String command;

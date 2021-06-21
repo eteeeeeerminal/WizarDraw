@@ -3,6 +3,7 @@ package model;
 import event.WizarDrawEventMulticaster;
 import event.PaletteEvent;
 import event.PaletteListener;
+import fig.CircleFigure;
 import fig.Figure;
 import fig.RectangleFigure;
 
@@ -25,6 +26,10 @@ public class PaletteAndBrush {
     }
     public void setRectangle(boolean isFilled) {
         brush = new RectangleFigure(0,0,0,0, getBrushColor(), isFilled);
+        update();
+    }
+    public void setCircle(boolean isFilled) {
+        brush = new CircleFigure(0,0,0,0, getBrushColor(), isFilled);
         update();
     }
     public Figure createFigure(int x, int y) {

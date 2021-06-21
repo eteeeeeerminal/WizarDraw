@@ -91,6 +91,14 @@ public class DrawModel implements CommandListener {
                 CommandEnum.FILLED_RECT,
                 (e) -> paletteBrush.setRectangle(true)
         );
+        commandProcessors.put(
+                CommandEnum.CIRCLE,
+                (e) -> paletteBrush.setCircle(false)
+        );
+        commandProcessors.put(
+                CommandEnum.FILLED_CIRCLE,
+                (e) -> paletteBrush.setCircle(true)
+        );
         return commandProcessors;
     }
 
