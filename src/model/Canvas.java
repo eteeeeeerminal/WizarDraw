@@ -21,7 +21,7 @@ public class Canvas {
         if (visibleHighlight && selectedFigure != null) {
             highlightFigure.setSize(selectedFigure.getWidth(), selectedFigure.getHeight());
             highlightFigure.setLocation(selectedFigure.getX(), selectedFigure.getY());
-            figs.addLast(highlightFigure);
+            figs.addFirst(highlightFigure);
         }
         return figs;
     }

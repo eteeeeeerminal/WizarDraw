@@ -78,6 +78,9 @@ public class CommandNavigator extends JPanel implements ModeListener {
                 new Items(new JComponent[]{
                         makeLabel(CommandEnum.RECT),
                         makeLabel(CommandEnum.FILLED_RECT),
+                        makeLabel(CommandEnum.CIRCLE),
+                        makeLabel(CommandEnum.FILLED_CIRCLE),
+                        makeLabel(CommandEnum.LINE),
                 })
         );
         Div selectMode = new Div(

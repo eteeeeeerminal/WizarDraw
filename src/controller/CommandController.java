@@ -49,7 +49,7 @@ public class CommandController
         if ((KeyEvent.CTRL_DOWN_MASK & modifiers) == KeyEvent.CTRL_DOWN_MASK) {
             if (KeyEvent.VK_Z == keycode) {
                 simpleCommandPerform(CommandEnum.UNDO);
-            } else if (KeyEvent.VK_Y == keycode) {
+            } else if (KeyEvent.VK_X == keycode) {
                 simpleCommandPerform(CommandEnum.REDO);
             }
         } else if (KeyEvent.VK_ESCAPE == keycode || KeyEvent.VK_Z == keycode) {
@@ -107,10 +107,16 @@ public class CommandController
         if ((KeyEvent.SHIFT_DOWN_MASK & modifiers) == KeyEvent.SHIFT_DOWN_MASK) {
             if (KeyEvent.VK_R == keycode) {
                 simpleCommandPerform(CommandEnum.FILLED_RECT);
+            } else if (KeyEvent.VK_C == keycode) {
+                simpleCommandPerform(CommandEnum.FILLED_CIRCLE);
             }
         } else {
             if (KeyEvent.VK_R == keycode) {
                 simpleCommandPerform(CommandEnum.RECT);
+            } else if (KeyEvent.VK_C == keycode) {
+                simpleCommandPerform(CommandEnum.CIRCLE);
+            } else if (KeyEvent.VK_S == keycode) {
+                simpleCommandPerform(CommandEnum.LINE);
             }
         }
     }

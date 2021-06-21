@@ -9,14 +9,17 @@ public enum CommandEnum {
     HIGHLIGHT_OFF("HighlightOFF", "ModeChange"),
     DELETE("Delete", "d"),
     UNDO("Undo", "Ctrl+z"),
-    REDO("Redo", "Ctrl+y"),
+    REDO("Redo", "Ctrl+x"),
     QUIT("Quit", "q"),
     CHANGE_COLOR("ChangeColor", "c"),
     PALETTE1("Palette1", "1"),
     PALETTE2("Palette2", "2"),
     PALETTE3("Palette3", "3"),
     RECT("Rect", "r"),
-    FILLED_RECT("FilledRect", "Shift+r");
+    FILLED_RECT("FilledRect", "Shift+r"),
+    CIRCLE("Circle", "c"),
+    FILLED_CIRCLE("FilledCircle","Shift+c"),
+    LINE("Line", "s");
 
     public final String name;
     public final String command;

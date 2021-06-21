@@ -6,7 +6,7 @@ public class SelectHighlight extends Figure {
     protected Color outlineColor;
     public SelectHighlight(int x, int y, int w, int h) {
         super(x, y, w, h, new Color(0,128,255, 100));
-        outlineColor = new Color(255,128,0);
+        outlineColor = new Color(255,128,0, 100);
     }
 
     public void draw(Graphics g) {
