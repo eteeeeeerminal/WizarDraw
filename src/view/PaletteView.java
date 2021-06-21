@@ -9,18 +9,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PaletteView extends JPanel implements PaletteListener {
-    protected int size, margin;
+    protected final int size=30, margin=5;
     protected Figure[] paletteFig;
     protected final PaletteAndBrush palette;
     public PaletteView(PaletteAndBrush p) {
         palette = p;
         palette.addListener(this);
 
-        size = 30; margin = 5;
+        setLayout(null);
+
         int outerSize = size+2*margin;
-        setPreferredSize(new Dimension(outerSize*4, outerSize));
-        setMinimumSize(new Dimension(outerSize*3, outerSize));
-        setMaximumSize(new Dimension(outerSize*5, outerSize));
+        setPreferredSize(new Dimension(outerSize*4, outerSize+2*margin));
+        setMinimumSize(new Dimension(outerSize*3, outerSize+2*margin));
+        setMaximumSize(new Dimension(outerSize*5, outerSize+2*margin));
 
         Color[] paletteColors = palette.getPalette();
         paletteFig = new Figure[3];
@@ -30,6 +31,12 @@ public class PaletteView extends JPanel implements PaletteListener {
                     (int)(size*0.7), (int)(size*0.7),
                     paletteColors[i], true
             );
+            JLabel l = new JLabel(String.valueOf(i+1));
+            l.setBounds(
+                    (int)(outerSize*(i*0.7+1)), margin+(int)(size*0.7),
+                    (int)(size*0.7), (int)(size*0.7)
+            );
+            add(l);
         }
     }
     public void paintComponent(Graphics g) {

@@ -7,7 +7,7 @@ import event.ModeListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.util.HashMap;
 
@@ -46,16 +46,18 @@ class Div extends JPanel {
         deactivate();
     }
     public void activate() {
-        setBorder(new LineBorder(Color.RED, 3));
+        setBorder(new EtchedBorder(Color.RED, Color.RED));
     }
     public void deactivate() {
-        setBorder(new LineBorder(Color.BLACK, 1));
+        setBorder(new EtchedBorder(new Color(0, 0, 0, 0), Color.BLACK));
     }
 }
 
 public class CommandNavigator extends JPanel implements ModeListener {
     protected HashMap<ModeEnum, Div> modeNavElements = new HashMap<>();
     public CommandNavigator() {
+        setLayout(new BorderLayout());
+
         Div fileMode = new Div(
                 makeLabel(ModeEnum.FILE),
                 new Items(new JComponent[]{
@@ -78,21 +80,40 @@ public class CommandNavigator extends JPanel implements ModeListener {
                         makeLabel(CommandEnum.FILLED_RECT),
                 })
         );
+        Div selectMode = new Div(
+                makeLabel(ModeEnum.SELECT),
+                new Items(new JComponent[]{
+                        makeLabel(CommandEnum.DELETE),
+                        makeLabel(CommandEnum.DESELECT),
+                })
+        );
         Div normalMode = new Div(
                 makeLabel(ModeEnum.NORMAL),
                 new Items(new JComponent[]{
                         fileMode,
                         colorMode,
                         brushMode,
+                        selectMode,
                 })
         );
         normalMode.activate();
-        add(normalMode);
+        add(new Padding(normalMode, 3), BorderLayout.CENTER);
+
+        Div rootCommands = new Div(
+                new JLabel("Root commands"),
+                new Items(new JComponent[]{
+                        makeLabel(ModeEnum.NORMAL),
+                        makeLabel(CommandEnum.UNDO),
+                        makeLabel(CommandEnum.REDO),
+                })
+        );
+        add(new Padding(rootCommands, 3), BorderLayout.SOUTH);
 
         modeNavElements.put(ModeEnum.NORMAL, normalMode);
         modeNavElements.put(ModeEnum.FILE, fileMode);
         modeNavElements.put(ModeEnum.COLOR, colorMode);
         modeNavElements.put(ModeEnum.BRUSH, brushMode);
+        modeNavElements.put(ModeEnum.SELECT, selectMode);
     }
 
     public void modeChanged(ModeEvent e) {

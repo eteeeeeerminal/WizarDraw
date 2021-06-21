@@ -1,6 +1,15 @@
 package command;
 
 public enum CommandEnum {
+    CREATE_FIGURE("CreateFigure", "MouseLB"),
+    RESHAPE_FIGURE("ReshapeFigure", "MouseDrag"),
+    SELECT("Select", "MouseLB"),
+    DESELECT("DeSelect", "q"),
+    HIGHLIGHT_ON("HighlightON", "ModeChange"),
+    HIGHLIGHT_OFF("HighlightOFF", "ModeChange"),
+    DELETE("Delete", "d"),
+    UNDO("Undo", "Ctrl+z"),
+    REDO("Redo", "Ctrl+y"),
     QUIT("Quit", "q"),
     CHANGE_COLOR("ChangeColor", "c"),
     PALETTE1("Palette1", "1"),

@@ -14,15 +14,36 @@ public class DrawModel implements CommandListener {
         paletteBrush = p;
         canvas = c;
     }
-    public void createFigure(int x, int y) {
-        canvas.createFigure(paletteBrush.createFigure(x, y));
-    }
-    public void reshapeFigure(int x1, int y1, int x2, int y2) {
-        canvas.reshapeFigure(x1, y1, x2, y2);
-    }
 
     public void commandPerformed(CommandEvent e) {
         switch (e.getCommand()) {
+            case CREATE_FIGURE:
+                canvas.createFigure(paletteBrush.createFigure(e.getPoint1().x, e.getPoint1().y));
+                break;
+            case RESHAPE_FIGURE:
+                canvas.reshapeFigure(e.getPoint1().x, e.getPoint1().y, e.getPoint2().x, e.getPoint2().y);
+                break;
+            case SELECT:
+                canvas.select(e.getPoint1().x, e.getPoint1().y);
+                break;
+            case DESELECT:
+                canvas.deselect();
+                break;
+            case HIGHLIGHT_ON:
+                canvas.setVisibleHighlight(true);
+                break;
+            case HIGHLIGHT_OFF:
+                canvas.setVisibleHighlight(false);
+                break;
+            case DELETE:
+                canvas.delete();
+                break;
+            case UNDO:
+                canvas.undo();
+                break;
+            case REDO:
+                canvas.redo();
+                break;
             case QUIT:
                 System.exit(0);
                 break;
