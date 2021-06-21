@@ -80,12 +80,20 @@ public class CommandNavigator extends JPanel implements ModeListener {
                         makeLabel(CommandEnum.FILLED_RECT),
                 })
         );
+        Div selectMode = new Div(
+                makeLabel(ModeEnum.SELECT),
+                new Items(new JComponent[]{
+                        makeLabel(CommandEnum.DELETE),
+                        makeLabel(CommandEnum.DESELECT),
+                })
+        );
         Div normalMode = new Div(
                 makeLabel(ModeEnum.NORMAL),
                 new Items(new JComponent[]{
                         fileMode,
                         colorMode,
                         brushMode,
+                        selectMode,
                 })
         );
         normalMode.activate();
@@ -105,6 +113,7 @@ public class CommandNavigator extends JPanel implements ModeListener {
         modeNavElements.put(ModeEnum.FILE, fileMode);
         modeNavElements.put(ModeEnum.COLOR, colorMode);
         modeNavElements.put(ModeEnum.BRUSH, brushMode);
+        modeNavElements.put(ModeEnum.SELECT, selectMode);
     }
 
     public void modeChanged(ModeEvent e) {

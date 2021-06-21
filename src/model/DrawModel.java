@@ -23,6 +23,21 @@ public class DrawModel implements CommandListener {
             case RESHAPE_FIGURE:
                 canvas.reshapeFigure(e.getPoint1().x, e.getPoint1().y, e.getPoint2().x, e.getPoint2().y);
                 break;
+            case SELECT:
+                canvas.select(e.getPoint1().x, e.getPoint1().y);
+                break;
+            case DESELECT:
+                canvas.deselect();
+                break;
+            case HIGHLIGHT_ON:
+                canvas.setVisibleHighlight(true);
+                break;
+            case HIGHLIGHT_OFF:
+                canvas.setVisibleHighlight(false);
+                break;
+            case DELETE:
+                canvas.delete();
+                break;
             case UNDO:
                 canvas.undo();
                 break;

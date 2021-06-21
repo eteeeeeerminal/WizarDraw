@@ -27,10 +27,18 @@ public class CommandController
     public void mouseClicked(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         mouseStart.setLocation(e.getPoint());
-        commandPerform(new CommandEvent(this, CommandEnum.CREATE_FIGURE, e.getPoint()));
+        if (ModeEnum.SELECT == mode) {
+            commandPerform(new CommandEvent(this, CommandEnum.SELECT, e.getPoint()));
+        }else {
+            commandPerform(new CommandEvent(this, CommandEnum.CREATE_FIGURE, e.getPoint()));
+        }
     }
     public void mouseDragged(MouseEvent e) {
-        commandPerform(new CommandEvent(this, CommandEnum.RESHAPE_FIGURE, mouseStart, e.getPoint()));
+        if (ModeEnum.SELECT == mode) {
+
+        } else {
+            commandPerform(new CommandEvent(this, CommandEnum.RESHAPE_FIGURE, mouseStart, e.getPoint()));
+        }
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
@@ -60,6 +68,9 @@ public class CommandController
                 case FILE:
                     fileProcessor(keycode, modifiers);
                     break;
+                case SELECT:
+                    selectProcessor(keycode, modifiers);
+                    break;
             }
         }
     }
@@ -69,8 +80,11 @@ public class CommandController
             modeChange(ModeEnum.FILE);
         } else if (KeyEvent.VK_C == keycode) {
             modeChange(ModeEnum.COLOR);
-        } else if (KeyEvent.VK_S == keycode) {
+        }else if (KeyEvent.VK_B == keycode) {
             modeChange(ModeEnum.BRUSH);
+        } else if (KeyEvent.VK_S == keycode) {
+            modeChange(ModeEnum.SELECT);
+            simpleCommandPerform(CommandEnum.HIGHLIGHT_ON);
         }
     }
     protected void fileProcessor(int keyCode, int modifiers) {
@@ -98,6 +112,13 @@ public class CommandController
             if (KeyEvent.VK_R == keycode) {
                 simpleCommandPerform(CommandEnum.RECT);
             }
+        }
+    }
+    protected void selectProcessor(int keycode, int modifiers) {
+        if (KeyEvent.VK_D == keycode) {
+            simpleCommandPerform(CommandEnum.DELETE);
+        } else if (KeyEvent.VK_Q == keycode) {
+            simpleCommandPerform(CommandEnum.DESELECT);
         }
     }
     public void addCommandListener(CommandListener l) {
@@ -128,6 +149,7 @@ public class CommandController
         modeListener = WizarDrawEventMulticaster.add(modeListener, l);
     }
     public void modeChange(ModeEnum m) {
+        simpleCommandPerform(CommandEnum.HIGHLIGHT_OFF);
         ModeEnum previous = mode;
         mode = m;
         if (modeListener != null) {

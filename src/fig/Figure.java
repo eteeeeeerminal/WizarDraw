@@ -11,6 +11,18 @@ public abstract class Figure implements Cloneable {
         width = w; height = h;
         color = c;
     }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
     public void setSize(int w, int h) {
         width = w; height = h;
     }
@@ -19,6 +31,10 @@ public abstract class Figure implements Cloneable {
     }
     public void setColor(Color c) {
         color = c;
+    }
+    public boolean isInFigBox(int x, int y) {
+        return this.x <= x && this.y <= y
+                && x <= this.x + width && y <= this.y + height;
     }
     public void reshape(int x1, int y1, int x2, int y2) {
         int newx = Math.min(x1, x2);

@@ -42,6 +42,9 @@ public class CommandEvent extends EventObject {
         if (command == CommandEnum.RESHAPE_FIGURE && (p1 == null || p2 == null)) {
             throw new Error("Reshape figure command needs two points");
         }
+        if (command == CommandEnum.SELECT && p1 == null) {
+            throw new Error("Select command needs a point");
+        }
     }
     public CommandEnum getCommand() {
         return command;

@@ -4,7 +4,8 @@ public enum ModeEnum {
     NORMAL("Normal", "ESC|z"),
     FILE("File", "f"),
     COLOR("Color", "c"),
-    BRUSH("Brush", "s");
+    BRUSH("Brush", "b"),
+    SELECT("Select", "s");
 
     public final String name;
     public final String command;
