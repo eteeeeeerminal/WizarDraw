@@ -1,0 +1,25 @@
+@startuml
+
+card WizarDraw [
+    <b>WizarDraw</b>
+    ----
+    MainWindowClass
+]
+card CommandController
+card DrawModel
+card BrushAndPalette
+card Canvas
+
+card PaletteView
+card CanvasView
+
+
+WizarDraw --> CommandController: KeyEvent, MouseEvent
+
+CommandController --> DrawModel: CommandEvent
+DrawModel --> BrushAndPalette: method call
+DrawModel --> Canvas: method call
+BrushAndPalette --> PaletteView: PaletteEvent
+Canvas --> CanvasView: CanvasEvent
+
+@enduml

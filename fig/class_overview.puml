@@ -1,0 +1,86 @@
+@startuml
+
+package javax.swing {
+    class JPanel
+    class JFrame
+}
+
+package java.awt.event {
+    interface KeyListener
+    interface MouseListener
+    interface MouseMotionListener
+}
+
+package "command" {
+    enum CommandEnum
+    enum ModeEnum
+}
+
+package "controller" {
+    class CommandController implements KeyListener, MouseListener, MouseMotionListener
+    ModeEnum *-- CommandController
+}
+
+package "event" {
+    interface CanvasListener
+    interface PaletteListener
+    interface CommandListener
+    interface ModeListener
+
+    class CanvasEvent
+    CanvasEvent -- CanvasListener
+    class PaletteEvent
+    PaletteEvent -- PaletteListener
+    class CommandEvent
+    CommandEvent -- CommandListener
+    class ModeEvent
+    ModeEvent -- ModeListener
+
+    ModeEnum *-- ModeEvent
+    CommandEnum *-- CommandEvent
+}
+
+package "fig" {
+    abstract class Figure
+    abstract class FillableFigure extends Figure
+    class LineFigure extends Figure
+    class RectangleFigure extends FillableFigure
+    class CircleFigure extends FillableFigure
+    class SelectHighlight extends Figure
+}
+
+package "model" {
+    class Canvas
+    Figure *-- Canvas
+    class BrushAndPalette
+    Figure *-- BrushAndPalette
+    class DrawModel implements CommandListener
+    DrawModel o-- CommandController
+    note on link: CommandEvent
+    Canvas o-- DrawModel
+    BrushAndPalette o-- DrawModel
+}
+
+package "view" {
+    class CanvasView extends JPanel implements CanvasListener
+    CommandController o-- CanvasView
+    note on link: MouseEvent
+    Canvas o--o CanvasView
+    note on link: CanvasEvent
+    class PaletteView extends JPanel implements PaletteListener
+    BrushAndPalette o--o PaletteView
+    note on link: PaletteEvent
+    class CommandNavigator extends JPanel implements ModeListener
+    CommandController --o CommandNavigator
+    note on link: ModeEvent
+    class StatusView extends JPanel implements ModeListener
+    CommandController --o CommandNavigator
+    note on link: ModeEvent
+}
+
+class WizarDraw extends JFrame
+note top of WizarDraw: MainClass
+CommandController o-- WizarDraw
+note on link: KeyEvent
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+
+card CommandController
+card DrawModel
+card BrushAndPalette
+card Canvas
+
+card CanvasView
+
+CommandController --> DrawModel: CreateFigureCommand
+
+DrawModel --> BrushAndPalette: createFigure
+BrushAndPalette --> DrawModel: Figure
+
+DrawModel --> Canvas: createFigure
+
+note "ArrayDeque<Figure> figs" as N1
+Canvas -- N1
+N1 --> CanvasView
+
+@enduml
