@@ -17,14 +17,19 @@ public class CommandController
     protected ModeEnum mode = ModeEnum.NORMAL;
     protected CommandListener cmdListener;
     protected ModeListener modeListener;
-    protected Point mouseStart = new Point();
+    protected final Point mouseStart = new Point();
 
+    @Override
     public void keyTyped(KeyEvent e) {}
+    @Override
     public void keyPressed(KeyEvent e) {
         processCommand(e.getKeyCode(), e.getModifiersEx());
     }
+    @Override
     public void keyReleased(KeyEvent e) {}
+    @Override
     public void mouseClicked(MouseEvent e) {}
+    @Override
     public void mousePressed(MouseEvent e) {
         mouseStart.setLocation(e.getPoint());
         if (ModeEnum.SELECT == mode) {
@@ -33,16 +38,21 @@ public class CommandController
             commandPerform(new CommandEvent(this, CommandEnum.CREATE_FIGURE, e.getPoint()));
         }
     }
+    @Override
     public void mouseDragged(MouseEvent e) {
         if (ModeEnum.SELECT == mode) {
-
+            // will add some commands
         } else {
             commandPerform(new CommandEvent(this, CommandEnum.RESHAPE_FIGURE, mouseStart, e.getPoint()));
         }
     }
+    @Override
     public void mouseReleased(MouseEvent e) {}
+    @Override
     public void mouseEntered(MouseEvent e) {}
+    @Override
     public void mouseExited(MouseEvent e) {}
+    @Override
     public void mouseMoved(MouseEvent e) {}
 
     public void processCommand(int keycode, int modifiers) {
@@ -142,7 +152,7 @@ public class CommandController
     public void colorChangePerform(CommandEnum command) {
         commandPerform(new CommandEvent(
                 this, command,
-                (c) -> (JColorChooser.showDialog(null, "色を選択", c))
+                (c) -> (JColorChooser.showDialog(null, "Choose Color", c))
         ));
     }
     public void simpleCommandPerform(CommandEnum command) {
