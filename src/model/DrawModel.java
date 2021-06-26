@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * Process commands by operate PaletteBrush and Canvas.
+ */
 public class DrawModel implements CommandListener {
     protected final PaletteAndBrush paletteBrush;
     protected final Canvas canvas;
@@ -20,6 +23,10 @@ public class DrawModel implements CommandListener {
         commandProcessors = createCommandProcessors();
     }
 
+    /**
+     * Define Command behavior.
+     * @return map<command, process of command>
+     */
     protected HashMap<CommandEnum, Consumer<CommandEvent>> createCommandProcessors() {
         HashMap<CommandEnum, Consumer<CommandEvent>> commandProcessors = new HashMap<>();
         commandProcessors.put(
