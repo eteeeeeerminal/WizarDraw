@@ -13,10 +13,12 @@ import java.util.Iterator;
 public class CanvasView extends JPanel implements CanvasListener {
     protected final Canvas canvas;
     public CanvasView(Canvas m) {
-        this.setBackground(Color.white);
+        setBackground(Color.white);
         canvas = m;
         canvas.addListener(this);
     }
+
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         ArrayDeque<Figure> figs = canvas.getFigures();
@@ -25,6 +27,8 @@ public class CanvasView extends JPanel implements CanvasListener {
             iterator.next().draw(g);
         }
     }
+
+    @Override
     public void canvasUpdated(CanvasEvent e) {
         repaint();
     }

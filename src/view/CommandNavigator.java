@@ -58,6 +58,7 @@ public class CommandNavigator extends JPanel implements ModeListener {
     public CommandNavigator() {
         setLayout(new BorderLayout());
 
+        // initialize mode command navi
         Div fileMode = new Div(
                 makeLabel(ModeEnum.FILE),
                 new Items(new JComponent[]{
@@ -102,6 +103,13 @@ public class CommandNavigator extends JPanel implements ModeListener {
         normalMode.activate();
         add(new Padding(normalMode, 3), BorderLayout.CENTER);
 
+        modeNavElements.put(ModeEnum.NORMAL, normalMode);
+        modeNavElements.put(ModeEnum.FILE, fileMode);
+        modeNavElements.put(ModeEnum.COLOR, colorMode);
+        modeNavElements.put(ModeEnum.BRUSH, brushMode);
+        modeNavElements.put(ModeEnum.SELECT, selectMode);
+
+        // initialize root command navi
         Div rootCommands = new Div(
                 new JLabel("Root commands"),
                 new Items(new JComponent[]{
@@ -111,14 +119,9 @@ public class CommandNavigator extends JPanel implements ModeListener {
                 })
         );
         add(new Padding(rootCommands, 3), BorderLayout.SOUTH);
-
-        modeNavElements.put(ModeEnum.NORMAL, normalMode);
-        modeNavElements.put(ModeEnum.FILE, fileMode);
-        modeNavElements.put(ModeEnum.COLOR, colorMode);
-        modeNavElements.put(ModeEnum.BRUSH, brushMode);
-        modeNavElements.put(ModeEnum.SELECT, selectMode);
     }
 
+    @Override
     public void modeChanged(ModeEvent e) {
         modeNavElements.get(e.getPreviousMode()).deactivate();
         modeNavElements.get(e.getLatestMode()).activate();

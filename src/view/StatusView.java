@@ -1,7 +1,6 @@
 package view;
 
 import command.ModeEnum;
-import controller.CommandController;
 import event.ModeEvent;
 import event.ModeListener;
 
@@ -17,6 +16,7 @@ public class StatusView extends JPanel implements ModeListener {
         add(modeLabel);
     }
 
+    @Override
     public void modeChanged(ModeEvent e) {
         modeLabel.setText(e.getLatestMode().name);
     }
