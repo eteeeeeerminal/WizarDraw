@@ -106,6 +106,7 @@ public class DrawModel implements CommandListener {
         return commandProcessors;
     }
 
+    @Override
     public void commandPerformed(CommandEvent e) {
         commandProcessors.get(e.getCommand()).accept(e);
     }
