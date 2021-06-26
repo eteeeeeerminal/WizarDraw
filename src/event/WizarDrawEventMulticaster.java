@@ -2,6 +2,21 @@ package event;
 
 import java.util.EventListener;
 
+/**
+ * Put together multiple EventListeners.
+ * <p>
+ *     Implements based on {@link java.awt.AWTEventMulticaster}
+ *     Like linked list.
+ *     When you call event function once, then all listeners' function are called recursively.
+ *
+ * <pre>{@code
+ * CommandListener l, l2;
+ * // init l2
+ * l = WizarDrawEventMulticaster.add(l, l2);
+ * l.commandPerformed(new CommandEvent(hogehoge));
+ * // l2.commandPerformed are called internally.
+ * }</pre>
+ */
 public class WizarDrawEventMulticaster
         implements PaletteListener, CanvasListener,
             CommandListener, ModeListener {
