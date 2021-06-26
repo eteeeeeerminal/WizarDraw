@@ -7,9 +7,23 @@ import java.awt.*;
 import java.util.EventObject;
 import java.util.function.Function;
 
+/**
+ * Used in {@link CommandListener}.
+ * Pass Command and Command arguments to DrawModel.
+ * See {@link CommandListener}, {@link model.DrawModel}, {@link controller.CommandController}
+ */
 public class CommandEvent extends EventObject {
+    /**
+     * Performed command.
+     */
     protected final CommandEnum command;
+    /**
+     * Performed command arguments. This field is nullable.
+     */
     protected final Point p1, p2;
+    /**
+     * Performed command arguments. This field is nullable.
+     */
     protected final Function<Color, Color> changeColorF;
 
     public CommandEvent(CommandController source, CommandEnum c, Point p1, Point p2) {
@@ -32,6 +46,11 @@ public class CommandEvent extends EventObject {
     public CommandEvent(CommandController source, CommandEnum c) {
         this(source, c, (Function<Color, Color>) null);
     }
+
+    /**
+     * Some commands requires arguments.
+     * @throws Error if there are no requires arguments
+     */
     protected void validCommand() throws Error {
         if (command == CommandEnum.CHANGE_COLOR && changeColorF == null) {
             throw new Error("Change color command needs function");
