@@ -12,8 +12,8 @@ import java.awt.*;
 
 public class PaletteAndBrush {
     public static final int COLOR_PALETTE_SIZE=3;
-    protected Figure brush; // command processorのところでやったようなテクニックでコンストラクタをgetのときに呼ぶようにする
-    protected Color[] palette = new Color[COLOR_PALETTE_SIZE];
+    protected Figure brush;
+    protected final Color[] palette = new Color[COLOR_PALETTE_SIZE];
     protected int currentColor;
     protected PaletteListener listener;
 
