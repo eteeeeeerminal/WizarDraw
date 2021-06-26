@@ -7,6 +7,8 @@ public class LineFigure extends Figure {
         super(x, y, w, h, c);
     }
     public int getX() {
+        // Return upper left corner,
+        // but in draw(), (x, y) should be a start point of Line.
         return (width > 0) ? x : x+width;
     }
     public int getY() {

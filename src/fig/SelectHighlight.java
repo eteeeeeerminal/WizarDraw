@@ -2,6 +2,10 @@ package fig;
 
 import java.awt.*;
 
+/**
+ * Used to indicate which Figure is selected.
+ * See {@link model.Canvas}
+ */
 public class SelectHighlight extends Figure {
     protected Color outlineColor;
     public SelectHighlight(int x, int y, int w, int h) {
