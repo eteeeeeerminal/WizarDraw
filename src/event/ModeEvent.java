@@ -5,6 +5,10 @@ import controller.CommandController;
 
 import java.util.EventObject;
 
+/**
+ * Used in ModeListener.
+ * See {@link ModeListener}, {@link controller.CommandController}
+ */
 public class ModeEvent extends EventObject {
     protected ModeEnum latest;
     protected ModeEnum previous;
@@ -14,9 +18,16 @@ public class ModeEvent extends EventObject {
         this.previous = previous;
     }
 
+    /**
+     * @return Current mode. After changed mode.
+     */
     public ModeEnum getLatestMode() {
         return latest;
     }
+
+    /**
+     * @return Previous mode. Before changed mode.
+     */
     public ModeEnum getPreviousMode() {
         return previous;
     }
